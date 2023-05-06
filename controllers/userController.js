@@ -125,8 +125,7 @@ exports.forgotPassword = BigPromise(async (req, res, next) => {
   }
 });
 
-
-//password reset 
+//password reset
 exports.passwordReset = BigPromise(async (req, res, next) => {
   //get token from params
   const token = req.params.token;
@@ -168,14 +167,53 @@ exports.passwordReset = BigPromise(async (req, res, next) => {
 
 //dashboard for the user
 exports.getLoggedInUserDetails = BigPromise(async (req, res, next) => {
-    //req.user will be added by middleware
-    // find user by id
-    const user = await User.findById(req.user.id);
-  
-    //send response and user data
-    res.status(200).json({
-      success: true,
-      user,
-    });
+  //req.user will be added by middleware
+  // find user by id
+  const user = await User.findById(req.user.id);
+
+  //send response and user data
+  res.status(200).json({
+    success: true,
+    user,
   });
-  
+});
+
+//change password for the user
+exports.changePassword = BigPromise(async (req, res, next) => {
+  const userId = req.user.id;
+  const user = await User.findById(userId).select("+password");
+  const isCorrectOldPass = await user.isVaildatePassword(req.body.oldPassword);
+
+  if (!isCorrectOldPass) {
+    return next(new CustomError("old password is incorrect", 400));
+  }
+
+  user.password = req.body.password;
+  await user.save();
+  cookieToken(user, res);
+});
+
+//update user details
+exports.updateUserDetails = BigPromise(async (req, res, next) => {
+  // add a check for email and name in body
+  const { name, email } = req.body;
+  if (!name || !email) {
+    return next(new CustomError("Please provide name and email", 400));
+  }
+  // collect data from body
+  const newData = {
+    name: req.body.name,
+    email: req.body.email,
+  };
+
+  // update the data in user
+  const user = await User.findByIdAndUpdate(req.user.id, newData, {
+    new: true,
+    runValidators: true,
+    useFindAndModify: false,
+  });
+
+  res.status(200).json({
+    success: true,
+  });
+});
