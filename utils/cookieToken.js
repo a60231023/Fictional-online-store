@@ -1,7 +1,7 @@
 //This function take two parameters - user object and resquest object, it calls the getjwttoken function to get the token and return its 
 const cookieToken = (user, res) => {
     const token = user.getJwtToken();
-    console.log(token);
+    // console.log(token);
     const options = {
         expires: new Date(Date.now() + 3*24*60*60*1000),
         httpOnly: true
