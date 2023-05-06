@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/a60231023/Fictional-online-store/issues"
   },
-  "homepage": "https://github.com/a60231023/Fictional-online-store#readme"
+  "homepage": "https://github.com/a60231023/Fictional-online-store#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
 }
