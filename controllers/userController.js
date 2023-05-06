@@ -3,7 +3,6 @@ const BigPromise = require("../middlewares/bigPromise");
 const CustomError = require("../utils/customError");
 const cloudinary = require("cloudinary");
 const cookieToken = require("../utils/cookieToken");
-const mailHelper = require("../utils/emailHelper");
 const crypto = require("crypto");
 
 exports.signup = BigPromise(async (req, res, next) => {

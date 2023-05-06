@@ -24,8 +24,10 @@ app.use(
 
 //import test route
 const home = require("./routes/home");
+const user = require("./routes/userRoute");
 
 //router middleware
 app.use("/api/v1", home);
+app.use("/api/v1", user);
 
 module.exports = app;
