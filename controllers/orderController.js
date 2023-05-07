@@ -3,6 +3,7 @@ const Product = require("../models/product");
 const BigPromise = require("../middlewares/bigPromise");
 const CustomError = require("../utils/customError");
 
+//create order -- all user
 exports.createOrder = BigPromise(async (req, res, next) => {
   const { shippingInfo } = req.body;
   const user = req.user;
@@ -43,5 +44,59 @@ exports.createOrder = BigPromise(async (req, res, next) => {
   res.status(200).json({
     success: true,
     order,
+  });
+});
+
+//get order of logged in user -- user
+exports.getLoggedInOrders = BigPromise(async (req, res, next) => {
+  const order = await Order.find({ user: req.user._id });
+
+  if (!order) {
+    return next(new CustomError("No order", 401));
+  }
+
+  res.status(200).json({
+    success: true,
+    order,
+  });
+});
+
+//get one order -- admin
+exports.getOneOrder = BigPromise(async (req, res, next) => {
+    const order = await Order.findById(req.params.id).populate(
+      "user",
+      "name email"
+    );
+  
+    if (!order) {
+      return next(new CustomError("please check order id", 401));
+    }
+  
+    res.status(200).json({
+      success: true,
+      order,
+    });
+  });
+  
+//get all orders -- admin
+exports.adminGetAllOrders = BigPromise(async (req, res, next) => {
+  const orders = await Order.find();
+
+  res.status(200).json({
+    success: true,
+    orders,
+  });
+});
+
+//delete order -- admin
+exports.adminDeleteOrder = BigPromise(async (req, res, next) => {
+    const result = await Order.deleteOne({ _id: req.params.id });
+
+    if (result.deletedCount === 0) {
+      return next(new CustomError("No Such order found", 401));
+    }
+  
+  res.status(200).json({
+    success: true,
   });
 });
