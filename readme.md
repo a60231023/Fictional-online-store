@@ -91,31 +91,31 @@ npm run dev
 
 | Route                  | Method | Description                                                                                                                         |
 |------------------------|--------|-------------------------------------------------------------------------------------------------------------------------------------|
-| /signup                | POST   | Handles user registration                                                                                                           |
-| /login                 | POST   | Handles user authentication                                                                                                         |
-| /logout                | GET    | Handles user logout                                                                                                                 |
-| /forgotPassword        | POST   | Handles sending a password reset email to a user                                                                                    |
-| /password/reset/:token | POST   | Handles the password reset process                                                                                                  |
-| /userdashboard         | GET    | Returns the details of the currently logged-in user                                                                                 |
-| /password/update       | POST   | Handles the process of changing a user's password                                                                                    |
-| /userdashboard/update  | POST   | Handles the process of updating a user's profile information                                                                         |
-| /addToCart             | POST   | Handles the process of adding a product to the user's shopping cart                                                                  |
-| /admin/users           | GET    | Returns a list of all users in the system. Only administrators can access this route                                               |
-| /admin/user/:id        | GET    | Returns the details of a specific user. Only administrators can access this route                                                  |
-| /admin/user/:id        | PUT    | Handles the process of updating a user's profile information. Only administrators can access this route                             |
-| /admin/user/:id        | DELETE | Handles the process of deleting a user's account. Only administrators can access this route                                        |
+| `/signup`                | POST   | Handles user registration                                                                                                           |
+| `/login`                 | POST   | Handles user authentication                                                                                                         |
+| `/logout`                | GET    | Handles user logout                                                                                                                 |
+| `/forgotPassword`        | POST   | Handles sending a password reset email to a user                                                                                    |
+| `/password/reset/:token` | POST   | Handles the password reset process                                                                                                  |
+| `/userdashboard`         | GET    | Returns the details of the currently logged-in user                                                                                 |
+| `/password/update`       | POST   | Handles the process of changing a user's password                                                                                    |
+| `/userdashboard/update`  | POST   | Handles the process of updating a user's profile information                                                                         |
+| `/addToCart`             | POST   | Handles the process of adding a product to the user's shopping cart                                                                  |
+| `/admin/users`           | GET    | Returns a list of all users in the system. Only administrators can access this route                                               |
+| `/admin/user/:id`        | GET    | Returns the details of a specific user. Only administrators can access this route                                                  |
+| `/admin/user/:id`        | PUT    | Handles the process of updating a user's profile information. Only administrators can access this route                             |
+| `/admin/user/:id`        | DELETE | Handles the process of deleting a user's account. Only administrators can access this route                                        |
 
 ## Product Routes
 
 | Route                  | Method | Description                                                                                                           |
 |------------------------|--------|-----------------------------------------------------------------------------------------------------------------------|
-| /testProduct            | GET    | A test route to ensure that the API is functioning correctly.                                                         |
-| /products               | GET    | Returns a list of all products available in the system.                                                               |
-| /product/:id            | GET    | Returns the details of a specific product by its ID.                                                                  |
-| /products/search        | GET    | Returns a list of products that match the search query.                                                               |
-| /admin/product/add      | POST   | Adds a new product to the system. Only administrators can access this route.                                          |
-| /admin/product/update/:id | PUT    | Updates the details of a specific product by its ID. Only administrators can access this route.                       |
-| /admin/product/delete/:id | DELETE | Deletes a specific product by its ID. Only administrators can access this route.                                      |
+| `/testProduct`            | GET    | A test route to ensure that the API is functioning correctly.                                                         |
+| `/products`               | GET    | Returns a list of all products available in the system.                                                               |
+| `/product/:id`            | GET    | Returns the details of a specific product by its ID.                                                                  |
+| `/products/search`        | GET    | Returns a list of products that match the search query.                                                               |
+| `/admin/product/add`      | POST   | Adds a new product to the system. Only administrators can access this route.                                          |
+| `/admin/product/update/:id` | PUT    | Updates the details of a specific product by its ID. Only administrators can access this route.                       |
+| `/admin/product/delete/:id` | DELETE | Deletes a specific product by its ID. Only administrators can access this route.                                      |
 
 ## Order Routes
 
