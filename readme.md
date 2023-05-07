@@ -1,7 +1,5 @@
 ## Fictional online store
 
-<br>
-
 ### Table of contents:
 
 - [Introduction](#introduction)
@@ -10,8 +8,8 @@
 - [Installation](#installation)
 - [Endpoints](#endpoints)
   - [User and Admin Routes](#user-and-admin-routes)
-
-<br>
+  - [Product Routes](#product-routes)
+  - [Order Routes](#order-routes)
 
 # Introduction
 
@@ -22,16 +20,12 @@ electronic products. The API should allow users to perform the following actions
 - Add products to a shopping cart and place orders.
 - Register and authenticate users.
 
-<br>
-
 # Requirements
 
 - NodeJs
 - MongoDB (online or locally installed)
 - Postman (alternatives can be used)
 - Any code editor
-
-<br>
 
 # Packages used
 
@@ -48,8 +42,6 @@ electronic products. The API should allow users to perform the following actions
 - **razorpay** : Payment gateway integration library.
 - **validator** : Library for data validation and sanitization.
 - **nodemon**(dev dependency) : Utility that monitors changes in your source and automatically restarts your server.
-
-<br>
 
 # Installation
 
@@ -93,13 +85,9 @@ npm run start
 npm run dev
 ```
 
-<br>
-
 # Endpoints
 
 ## User and Admin Routes
-
-<br>
 
 | Route                  | Method | Description                                                                                                                         |
 |------------------------|--------|-------------------------------------------------------------------------------------------------------------------------------------|
@@ -117,5 +105,25 @@ npm run dev
 | /admin/user/:id        | PUT    | Handles the process of updating a user's profile information. Only administrators can access this route                             |
 | /admin/user/:id        | DELETE | Handles the process of deleting a user's account. Only administrators can access this route                                        |
 
+## Product Routes
 
+| Route                  | Method | Description                                                                                                           |
+|------------------------|--------|-----------------------------------------------------------------------------------------------------------------------|
+| /testProduct            | GET    | A test route to ensure that the API is functioning correctly.                                                         |
+| /products               | GET    | Returns a list of all products available in the system.                                                               |
+| /product/:id            | GET    | Returns the details of a specific product by its ID.                                                                  |
+| /products/search        | GET    | Returns a list of products that match the search query.                                                               |
+| /admin/product/add      | POST   | Adds a new product to the system. Only administrators can access this route.                                          |
+| /admin/product/update/:id | PUT    | Updates the details of a specific product by its ID. Only administrators can access this route.                       |
+| /admin/product/delete/:id | DELETE | Deletes a specific product by its ID. Only administrators can access this route.                                      |
+
+## Order Routes
+
+| Route | Method | Description |
+| --- | --- | --- |
+| `/order` | POST | This route creates a new order for the logged-in user. The user must be authenticated to access this route. |
+| `/getOrder` | GET | This route returns the details of all orders made by the currently logged-in user. The user must be authenticated to access this route. |
+| `/admin/order/:id` | GET | This route returns the details of a specific order by its ID. Only administrators can access this route. |
+| `/admin/order` | GET | This route returns a list of all orders made by all users in the system. Only administrators can access this route. |
+| `/admin/order/:id` | DELETE | This route deletes a specific order by its ID. Only administrators can access this route. |
 
