@@ -218,7 +218,7 @@ exports.updateUserDetails = BigPromise(async (req, res, next) => {
   });
 });
 
-//admin -- get all user 
+//admin -- get all user
 exports.adminAllUser = BigPromise(async (req, res, next) => {
   // select all users
   const users = await User.find();
@@ -243,5 +243,47 @@ exports.admingetOneUser = BigPromise(async (req, res, next) => {
   res.status(200).json({
     success: true,
     user,
+  });
+});
+
+//admin -- update user details
+exports.adminUpdateOneUserDetails = BigPromise(async (req, res, next) => {
+  // add a check for email and name in body
+  const { name, email, role } = req.body;
+
+  if (!name || !email || !role) {
+    next(new CustomError("Give the user details", 400));
+  }
+
+  // get data from request body
+  const newData = {
+    name,
+    email,
+    role,
+  };
+
+  // update the user in database
+  const user = await User.findByIdAndUpdate(req.params.id, newData, {
+    new: true,
+    runValidators: true,
+    useFindAndModify: false,
+  });
+
+  res.status(200).json({
+    success: true,
+  });
+});
+
+//admin -- delete one user
+exports.adminDeleteOneUser = BigPromise(async (req, res, next) => {
+  // get user from url and delete it, storing the result
+  const result = await User.deleteOne({ _id: req.params.id });
+
+  if (result.deletedCount === 0) {
+    return next(new CustomError("No Such user found", 401));
+  }
+
+  res.status(200).json({
+    success: true,
   });
 });

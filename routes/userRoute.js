@@ -10,7 +10,9 @@ const {
   changePassword,
   updateUserDetails,
   adminAllUser,
-  admingetOneUser
+  admingetOneUser,
+  adminUpdateOneUserDetails,
+  adminDeleteOneUser
 } = require("../controllers/userController");
 
 const { isLoggedIn, customRole } = require("../middlewares/auth");
@@ -28,7 +30,18 @@ router.post("/userdashboard/update", isLoggedIn, updateUserDetails);
 //admin only routes
 router.get("/admin/users", isLoggedIn, customRole("admin"), adminAllUser);
 router.get("/admin/user/:id", isLoggedIn, customRole("admin"), admingetOneUser);
-
+router.put(
+  "/admin/user/:id",
+  isLoggedIn,
+  customRole("admin"),
+  adminUpdateOneUserDetails
+);
+router.delete(
+  "/admin/user/:id",
+  isLoggedIn,
+  customRole("admin"),
+  adminDeleteOneUser
+);
 
 
 module.exports = router;
