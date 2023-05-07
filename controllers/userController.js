@@ -1,10 +1,9 @@
 const User = require("../models/user");
+const Product = require("../models/product");
 const BigPromise = require("../middlewares/bigPromise");
 const CustomError = require("../utils/customError");
-const cloudinary = require("cloudinary");
 const cookieToken = require("../utils/cookieToken");
 const mailHelper = require("../utils/emailHelper");
-
 const crypto = require("crypto");
 
 //signup logic for the user
@@ -215,6 +214,41 @@ exports.updateUserDetails = BigPromise(async (req, res, next) => {
 
   res.status(200).json({
     success: true,
+  });
+});
+
+//add to cart
+exports.addToCart = BigPromise(async (req, res, next) => {
+  const { products } = req.body;
+  if (!products) {
+    return next(new CustomError("Please provide products to add", 400));
+  }
+  const userId = req.user.id;
+
+  // Retrieve user's cart
+  const user = await User.findById(userId).populate("cart.product");
+
+  // Add each product to cart
+  for (let i = 0; i < products.length; i++) {
+    const { productId, quantity } = products[i];
+
+    // Find product by ID
+    const product = await Product.findById(productId);
+
+    // Add product to cart with specified quantity
+    user.cart.push({
+      product: product._id,
+      quantity,
+      price: product.price
+    });
+  }
+
+  // Save updated cart
+  await user.save();
+
+  res.status(200).json({
+    success: true,
+    message: "Products added to cart successfully",
   });
 });
 

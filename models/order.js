@@ -32,53 +32,39 @@ const orderSchema = new mongoose.Schema({
     ref: "User",
     required: [true, "User is needed"],
   },
-  orderItems: [
+  products: [
     {
-      name: {
-        type: String,
-        required: [true, "name of product is needed"],
+      product: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Product",
+        required: true,
       },
       quantity: {
         type: Number,
-        required: [true, "number of product is needed"],
-      },
-      image: {
-        type: String,
-        required: [true, "url of product image is needed"],
+        required: true,
+        min: [1, "Quantity can not be less than 1."],
       },
       price: {
         type: Number,
-        required: [true, "price of product is needed"],
-      },
-      product: {
-        type: mongoose.Schema.ObjectId,
-        ref: "Product",
-        required: [true, "product is needed"],
+        required: true,
+        min: [0, "Price can not be less than 0."],
       },
     },
   ],
-  paymentInfo: {
-    id: {
-        type: String 
-    }
-  },
   totalAmount: {
     type: Number,
-    required: [true, 'Total amount is required']
-  },
-  orderStatus: {
-    type: String,
     required: true,
-    default: 'processing'
+    min: [0, "Total amount can not be less than 0."],
   },
-  deliveredAt: {
-    type: Date
+  status: {
+    type: String,
+    enum: ["placed", "shipped", "delivered"],
+    default: "placed",
   },
   createdAt: {
     type: Date,
-    default: Date.now
-  }
+    default: Date.now,
+  },
 });
 
-
-module.exports = mongoose.model('Order', orderSchema);
+module.exports = mongoose.model("Order", orderSchema);
