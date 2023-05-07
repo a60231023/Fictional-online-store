@@ -70,3 +70,16 @@ exports.getAllProduct = BigPromise(async (req, res) => {
     filteredProductLength,
   });
 });
+
+//get one product -- for all user
+exports.getOneProduct = BigPromise(async (req, res, next) => {
+  const product = await Product.findById(req.params.id);
+
+  if (!product) {
+    return next(new CustomError("No product found with this id", 401));
+  }
+  res.status(200).json({
+    success: true,
+    product,
+  });
+});
