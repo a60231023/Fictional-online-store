@@ -3,6 +3,7 @@ const BigPromise = require("../middlewares/bigPromise");
 const CustomError = require("../utils/customError");
 const jwt = require("jsonwebtoken");
 
+//to check if the user is logged in
 exports.isLoggedIn = BigPromise(async (req, res, next) => {
   // check token first in cookies
   console.log(req.cookies);
@@ -24,6 +25,7 @@ exports.isLoggedIn = BigPromise(async (req, res, next) => {
   next();
 });
 
+//to check the role of the user
 exports.customRole = (...roles) => {
   return (req, res, next) => {
     if (!roles.includes(req.user.role)) {

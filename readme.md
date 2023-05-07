@@ -153,9 +153,9 @@ npm run dev
 
 ## User Schema
 
-| Attribute     | Data Type       | Required | Description                                                          |
+| Attribute | Data Type | Required | Description |
 |---------------|----------------|----------|----------------------------------------------------------------------|
-| name          | String         | Yes      | User's name.                                                         |
+| name | String | Yes | User's name. |
 | email         | String         | Yes      | User's email address. Must be a valid email address and unique.       |
 | password      | String         | Yes      | User's password. Must be at least 6 characters long.                  |
 | role          | String         | No       | User's role. Default value is 'user'.                                 |
@@ -182,20 +182,20 @@ npm run dev
 
 ## Order Schema
 
-| Field         | Type                           | Required | Description                                             |
+| Field | Type | Required | Description |
 |---------------|--------------------------------|----------|---------------------------------------------------------|
-| shippingInfo  | Object                         | Yes      | Information about the shipping address and contact info |
-| shippingInfo.address | String            | Yes      | Shipping address                                         |
-| shippingInfo.phoneNumber | Number     | Yes      | Phone number for contact regarding shipping             |
-| shippingInfo.city | String            | Yes      | City where the shipping address is located              |
-| shippingInfo.state | String           | Yes      | State or province where the shipping address is located |
-| shippingInfo.country | String         | Yes      | Country where the shipping address is located           |
-| shippingInfo.postalCode | Number     | Yes      | Postal or zip code for the shipping address             |
-| user          | ObjectId (refers to User)    | Yes      | User who placed the order                                |
-| products      | Array of product objects      | Yes      | List of products and their quantities and prices        |
-| products.product | ObjectId (refers to Product) | Yes      | Product being ordered                                    |
-| products.quantity | Number             | Yes      | Quantity of the product being ordered                    |
-| products.price | Number               | Yes      | Price of the product being ordered                        |
-| totalAmount   | Number                         | Yes      | Total cost of the order                                  |
-| status        | String                         | No       | Current status of the order (placed, shipped, delivered) |
-| createdAt     | Date                           | No       | Date and time when the order was created                 |
+| shippingInfo | Object | Yes | Information about the shipping address and contact info |
+| shippingInfo.address | String | Yes | Shipping address |
+| shippingInfo.phoneNumber | Number | Yes | Phone number for contact regarding shipping |
+| shippingInfo.city | String | Yes | City where the shipping address is located |
+| shippingInfo.state | String | Yes | State or province where the shipping address is located |
+| shippingInfo.country | String | Yes | Country where the shipping address is located |
+| shippingInfo.postalCode | Number | Yes | Postal or zip code for the shipping address |
+| user | ObjectId (refers to User) | Yes | User who placed the order |
+| products | Array of product objects | Yes | List of products and their quantities and prices |
+| products.product | ObjectId (refers to Product) | Yes | Product being ordered |
+| products.quantity | Number | Yes | Quantity of the product being ordered |
+| products.price | Number | Yes | Price of the product being ordered |
+| totalAmount | Number | Yes | Total cost of the order |
+| status | String | No | Current status of the order (placed, shipped, delivered) |
+| createdAt | Date | No | Date and time when the order was created |

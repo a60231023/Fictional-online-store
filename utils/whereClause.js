@@ -1,3 +1,4 @@
+//where clause for making and searching the query
 class WhereClause {
   constructor(base, bigQ) {
     this.base = base;

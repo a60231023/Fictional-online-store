@@ -1,3 +1,4 @@
+// to send the mail
 const nodemailer = require('nodemailer');
 
 const mailHelper = async (option) => {

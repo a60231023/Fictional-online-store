@@ -1,4 +1,4 @@
-//This function take two parameters - user object and resquest object, it calls the getjwttoken function to get the token and return its 
+//This function take two parameters - user object and resquest object, it calls the getjwttoken function to get the token and save the res.cookie as the token and return the object
 const cookieToken = (user, res) => {
     const token = user.getJwtToken();
     // console.log(token);

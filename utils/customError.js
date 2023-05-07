@@ -1,3 +1,4 @@
+// custom error class 
 class CustomError extends Error{
     constructor(message, code){
         super(message);
