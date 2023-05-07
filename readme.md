@@ -5,11 +5,16 @@
 - [Introduction](#introduction)
 - [Requirements](#requirements)
 - [Packages used](#packages-used)
+- [Folder Structure](#folder-structure)
 - [Installation](#installation)
 - [Endpoints](#endpoints)
   - [User and Admin Routes](#user-and-admin-routes)
   - [Product Routes](#product-routes)
   - [Order Routes](#order-routes)
+- [Schema](#schema)
+  - [User Schema](#user-schema)
+  - [Product Schema](#product-schema)
+  - [Order Schema](#order-schema)
 
 # Introduction
 
@@ -42,6 +47,23 @@ electronic products. The API should allow users to perform the following actions
 - **razorpay** : Payment gateway integration library.
 - **validator** : Library for data validation and sanitization.
 - **nodemon**(dev dependency) : Utility that monitors changes in your source and automatically restarts your server.
+
+# Folder Structure
+
+| Folder/File   | Description                                                |
+|----------------|------------------------------------------------------------|
+| config         | Contains configuration files such as database configuration |
+| controllers    | Contains modules that handle HTTP requests and responses    |
+| middlewares    | Contains modules that add additional functionality to requests and responses |
+| models         | Contains modules that represent the schema of different entities |
+| node_modules   | Contains installed npm packages and their dependencies      |
+| routes         | Contains modules that define the application routes         |
+| utils          | Contains utility functions used across the application      |
+| .env           | Contains environment variables used for application configuration |
+| app.js         | declaring all the middlewares and register the routes for incoming request                              |
+| index.js       | Runs the application and listens for incoming requests, Entry point of the application       |
+
+The table above provides a brief description of each item in the folder structure.
 
 # Installation
 
@@ -127,3 +149,53 @@ npm run dev
 | `/admin/order` | GET | This route returns a list of all orders made by all users in the system. Only administrators can access this route. |
 | `/admin/order/:id` | DELETE | This route deletes a specific order by its ID. Only administrators can access this route. |
 
+# Schema 
+
+## User Schema
+
+| Attribute     | Data Type       | Required | Description                                                          |
+|---------------|----------------|----------|----------------------------------------------------------------------|
+| name          | String         | Yes      | User's name.                                                         |
+| email         | String         | Yes      | User's email address. Must be a valid email address and unique.       |
+| password      | String         | Yes      | User's password. Must be at least 6 characters long.                  |
+| role          | String         | No       | User's role. Default value is 'user'.                                 |
+| cart          | Array of Object | No       | Array of product objects that user has added to their cart.            |
+| forgotPasswordToken | String | No | Token generated when user forgets their password. |
+| forgotPasswordExpiry | Date | No | Expiration date/time of the forgot password token. |
+| createdAt     | Date           | No       | Date and time when the user object was created.                        |
+
+## Product Schema
+
+| Attribute | Type | Required | Default | Description |
+| --------- | ---- | -------- | ------- | ----------- |
+| name | String | Yes | - | The name of the product |
+| price | Number | Yes | - | The price of the product |
+| description | String | Yes | - | The description of the product |
+| photos | Array | No | - | An array of objects containing the id and secure_url of the photos of the product |
+| category | String | Yes | - | The category of the product |
+| brand | String | Yes | - | The brand of the product |
+| ratings | Number | No | 0 | The rating of the product |
+| numberOfReviews | Number | No | 0 | The number of reviews of the product |
+| reviews | Array | No | - | An array of objects containing the user who reviewed the product, their name, rating, and comment |
+| user | ObjectId | Yes | - | The user who created the product |
+| createdAt | Date | No | Date.now | The date the product was created |
+
+## Order Schema
+
+| Field         | Type                           | Required | Description                                             |
+|---------------|--------------------------------|----------|---------------------------------------------------------|
+| shippingInfo  | Object                         | Yes      | Information about the shipping address and contact info |
+| shippingInfo.address | String            | Yes      | Shipping address                                         |
+| shippingInfo.phoneNumber | Number     | Yes      | Phone number for contact regarding shipping             |
+| shippingInfo.city | String            | Yes      | City where the shipping address is located              |
+| shippingInfo.state | String           | Yes      | State or province where the shipping address is located |
+| shippingInfo.country | String         | Yes      | Country where the shipping address is located           |
+| shippingInfo.postalCode | Number     | Yes      | Postal or zip code for the shipping address             |
+| user          | ObjectId (refers to User)    | Yes      | User who placed the order                                |
+| products      | Array of product objects      | Yes      | List of products and their quantities and prices        |
+| products.product | ObjectId (refers to Product) | Yes      | Product being ordered                                    |
+| products.quantity | Number             | Yes      | Quantity of the product being ordered                    |
+| products.price | Number               | Yes      | Price of the product being ordered                        |
+| totalAmount   | Number                         | Yes      | Total cost of the order                                  |
+| status        | String                         | No       | Current status of the order (placed, shipped, delivered) |
+| createdAt     | Date                           | No       | Date and time when the order was created                 |
