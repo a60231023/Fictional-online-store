@@ -84,6 +84,25 @@ exports.getOneProduct = BigPromise(async (req, res, next) => {
   });
 });
 
+//get product according to search query
+exports.searchProducts = BigPromise(async (req, res, next) => {
+  const query = req.query.q; // q parameter for search query
+  const category = req.query.category;
+  const filters = {
+    $or: [
+      { name: { $regex: query, $options: "i" } }, // search by name
+      { description: { $regex: query, $options: "i" } }, // search by description
+      { category: { $regex: category, $options: "i" } }, // search by category
+    ],
+  };
+  try {
+    const products = await Product.find(filters);
+    res.status(200).json({ success: true, products });
+  } catch (error) {
+    next(error);
+  }
+});
+
 //update a product details -- admin
 exports.adminUpdateOneProduct = BigPromise(async (req, res, next) => {
   let product = await Product.findById(req.params.id);

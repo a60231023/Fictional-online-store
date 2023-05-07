@@ -7,6 +7,7 @@ const {
   getOneProduct,
   adminDeleteOneProduct,
   adminUpdateOneProduct,
+  searchProducts
 } = require("../controllers/productController");
 const { isLoggedIn, customRole } = require("../middlewares/auth");
 
@@ -14,6 +15,7 @@ const { isLoggedIn, customRole } = require("../middlewares/auth");
 router.get("/testProduct", testProduct);
 router.get("/products", getAllProduct);
 router.get("/product/:id", getOneProduct);
+router.get('/products/search', searchProducts);
 
 //admin -- product modify routes
 router.post("/admin/product/add", isLoggedIn, customRole("admin"), addProduct);
