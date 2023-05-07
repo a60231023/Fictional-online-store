@@ -18,8 +18,6 @@ const {
 
 const { isLoggedIn, customRole } = require("../middlewares/auth");
 
-const { createOrder } = require("../controllers/orderController");
-
 //user routes
 router.post("/signup", signup);
 router.post("/login", login);
@@ -30,7 +28,6 @@ router.get("/userdashboard", isLoggedIn, getLoggedInUserDetails);
 router.post("/password/update", isLoggedIn, changePassword);
 router.post("/userdashboard/update", isLoggedIn, updateUserDetails);
 router.post("/addToCart", isLoggedIn, addToCart);
-router.post("/order", isLoggedIn, createOrder);
 
 //admin only routes
 router.get("/admin/users", isLoggedIn, customRole("admin"), adminAllUser);

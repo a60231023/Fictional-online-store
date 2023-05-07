@@ -26,10 +26,12 @@ app.use(
 const home = require("./routes/home");
 const user = require("./routes/userRoute");
 const product = require("./routes/productRoute");
+const order = require("./routes/orderRoute")
 
 //router middleware
 app.use("/api/v1", home);
 app.use("/api/v1", user);
 app.use("/api/v1", product);
+app.use("/api/v1", order);
 
 module.exports = app;
