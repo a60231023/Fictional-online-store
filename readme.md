@@ -109,6 +109,8 @@ npm run dev
 
 # Endpoints
 
+** All the routes will be start from `/api/v1`, so for example `/signup` will be `/api/v1/signup`**
+
 ## User and Admin Routes
 
 | Route                    | Method | Description                                                                                             | Required Data                  |
